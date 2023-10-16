@@ -10,9 +10,13 @@ fun main() {
     println("Перемешанные книги:")
     println(shuffled)
 
-    val sorted = shuffled.sortByYear()
-    println("Сортированные книги:")
-    println(sorted)
+    val sortedByYear = shuffled.sortByYear()
+    println("Сортированные книги по году:")
+    println(sortedByYear)
+
+    val sortedByO = shuffled.sortByO()
+    println("Сортированные книги по букве `О`:")
+    println(sortedByO)
 }
 
 fun createAbsList(): List<String> {
@@ -45,3 +49,7 @@ internal fun List<String>.mapToBook(): List<Book> {
 }
 
 internal fun List<Book>.sortByYear(): List<Book> = sortedBy { it.year }
+
+internal fun List<Book>.sortByO(): List<Book> = sortedWith(
+    compareBy<Book> { (title,_)  -> title.count { 'о' == it || 'О' == it} }.reversed()
+)

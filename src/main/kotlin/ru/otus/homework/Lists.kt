@@ -20,6 +20,17 @@ fun main() {
 
     println("Сортированные книги по букве `О` только с буквой `О`:")
     println(sortedByO)
+
+    println("Cписок натуральных чисел от 1 до 5")
+    val nList = NaturalList(5)
+    nList.forEachIndexed { i, n ->
+        println("$i: $n")
+    }
+
+    println("Для нашего списка работают стандартные методы коллекций Kotlin:")
+    nList.map { it + 1 }.filter { 0 == it % 2 }.forEachIndexed { i, n ->
+        println("$i: $n")
+    }
 }
 
 fun createAbsList(): List<String> {

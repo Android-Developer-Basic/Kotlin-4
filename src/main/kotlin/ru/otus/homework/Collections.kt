@@ -3,7 +3,16 @@ package ru.otus.homework
 fun main() {
     val abs: List<String> = createAbsList()
     val absBooks: List<Book> = abs.mapToBook()
+    println("Список книг:")
     println(absBooks)
+
+    val shuffled = absBooks.shuffled()
+    println("Перемешанные книги:")
+    println(shuffled)
+
+    val sorted = shuffled.sortByYear()
+    println("Сортированные книги:")
+    println(sorted)
 }
 
 fun createAbsList(): List<String> {
@@ -26,7 +35,7 @@ fun createAbsList(): List<String> {
     return result
 }
 
-data class Book(val title: String, val year: Number)
+data class Book(val title: String, val year: Int)
 
 internal fun List<String>.mapToBook(): List<Book> {
     val regex = "([^(]+)\\((\\d+)".toRegex()
@@ -34,3 +43,5 @@ internal fun List<String>.mapToBook(): List<Book> {
         .map { it.destructured }
         .map { (title, year) -> Book(title.trim(), year.toInt()) }
 }
+
+internal fun List<Book>.sortByYear(): List<Book> = sortedBy { it.year }

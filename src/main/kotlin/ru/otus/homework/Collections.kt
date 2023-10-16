@@ -14,7 +14,10 @@ fun main() {
     println("Сортированные книги по году:")
     println(sortedByYear)
 
-    val sortedByO = shuffled.onlyWithO().sortByO()
+    val sortedByO = shuffled.toMutableList()
+    sortedByO.onlyWithO()
+    sortedByO.sortByO()
+
     println("Сортированные книги по букве `О` только с буквой `О`:")
     println(sortedByO)
 }
@@ -50,8 +53,12 @@ internal fun List<String>.mapToBook(): List<Book> {
 
 internal fun List<Book>.sortByYear(): List<Book> = sortedBy { it.year }
 
-internal fun List<Book>.sortByO(): List<Book> = sortedWith(
-    compareBy<Book> { (title,_)  -> title.count { 'о' == it || 'О' == it} }.reversed()
-)
+internal fun MutableList<Book>.sortByO() {
+    sortWith(
+        compareBy<Book> { (title,_)  -> title.count { 'о' == it || 'О' == it} }.reversed()
+    )
+}
 
-internal fun List<Book>.onlyWithO(): List<Book> = filter { (title,_)  -> title.any { 'о' == it || 'О' == it } }
+internal fun MutableList<Book>.onlyWithO() {
+    this.retainAll { (title, _) -> title.any { 'о' == it || 'О' == it } }
+}

@@ -14,8 +14,8 @@ fun main() {
     println("Сортированные книги по году:")
     println(sortedByYear)
 
-    val sortedByO = shuffled.sortByO()
-    println("Сортированные книги по букве `О`:")
+    val sortedByO = shuffled.onlyWithO().sortByO()
+    println("Сортированные книги по букве `О` только с буквой `О`:")
     println(sortedByO)
 }
 
@@ -53,3 +53,5 @@ internal fun List<Book>.sortByYear(): List<Book> = sortedBy { it.year }
 internal fun List<Book>.sortByO(): List<Book> = sortedWith(
     compareBy<Book> { (title,_)  -> title.count { 'о' == it || 'О' == it} }.reversed()
 )
+
+internal fun List<Book>.onlyWithO(): List<Book> = filter { (title,_)  -> title.any { 'о' == it || 'О' == it } }

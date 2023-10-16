@@ -1,8 +1,9 @@
 package ru.otus.homework
 
 fun main() {
-    val abs = createAbsList()
-    println(abs)
+    val abs: List<String> = createAbsList()
+    val absBooks: List<Book> = abs.mapToBook()
+    println(absBooks)
 }
 
 fun createAbsList(): List<String> {
@@ -23,4 +24,13 @@ fun createAbsList(): List<String> {
     ))
 
     return result
+}
+
+data class Book(val title: String, val year: Number)
+
+internal fun List<String>.mapToBook(): List<Book> {
+    val regex = "([^(]+)\\((\\d+)".toRegex()
+    return mapNotNull { regex.find(it) }
+        .map { it.destructured }
+        .map { (title, year) -> Book(title.trim(), year.toInt()) }
 }

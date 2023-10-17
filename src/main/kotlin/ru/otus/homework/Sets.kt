@@ -20,4 +20,6 @@ fun main() {
     println("listToAdd: $listToAdd") // [4, 4, 4, 4, 4]
     val numSet2 = numSet + listToAdd
     println("numSet2: $numSet2") // [1, 2, 3, 4]
+    val numSet3 = numSet2 + 5
+    println("numSet3: $numSet3")
 }

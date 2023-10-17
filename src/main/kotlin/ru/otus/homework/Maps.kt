@@ -14,4 +14,12 @@ fun main() {
     val absYearMap = absList.associateWith { it.year }
     Book.logHashcode = true
     println("Время поиска года в Map по книге: " + measureNanoTime { absYearMap[unwrittenBook] })
+
+    val numMap: Map<Int, String> = mapOf(
+        1 to "Один",
+        2 to "Два",
+        3 to "Три"
+    )
+    println("Дай мне написание числа 2: " + numMap[2]) // "Два"
+    println("Дай мне написание числа 5: " + numMap[5]) // null
 }

@@ -11,4 +11,8 @@ fun main() {
     val absSet = absList.toSet()
     Book.logHashcode = true
     println("Время поиска в Set: " + measureNanoTime { absSet.contains(unwrittenBook) })
+
+    val numSet: Set<Int> = setOf(1, 2, 3)
+    println("2 находится в наборе: " + numSet.contains(2)) // true
+    println("5 находится в наборе: " + numSet.contains(5)) // false
 }

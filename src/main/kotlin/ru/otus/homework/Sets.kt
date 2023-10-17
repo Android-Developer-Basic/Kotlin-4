@@ -21,5 +21,7 @@ fun main() {
     val numSet2 = numSet + listToAdd
     println("numSet2: $numSet2") // [1, 2, 3, 4]
     val numSet3 = numSet2 + 5
-    println("numSet3: $numSet3")
+    println("numSet3: $numSet3") // [1, 2, 3, 4, 5]
+    val numSet4 = numSet3 - 1
+    println("numSet4: $numSet4") // [2, 3, 4, 5]
 }

@@ -23,4 +23,13 @@ fun main() {
     println("Дай мне цифру `Два`: " + numMap["Два"]) // 2
     println("Дай мне цифру `Пять`: " + numMap["Пять"]) // null
     println("Дай мне цифру `два`: " + numMap["два"]) // null
+
+    val listToAdd: List<Pair<String, Int>> = listOf(
+        "Четыре" to 444,
+        "Четыре" to 44,
+        "Четыре" to 4
+    )
+    println("listToAdd: $listToAdd") // [(Четыре, 444), (Четыре, 44), (Четыре, 4)]
+    val numMap2 = numMap + listToAdd
+    println("numMap2: $numMap2") // {Один=1, Два=2, Три=3, Четыре=4}
 }

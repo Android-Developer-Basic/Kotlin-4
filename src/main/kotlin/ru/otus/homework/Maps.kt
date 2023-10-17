@@ -36,4 +36,10 @@ fun main() {
     println("numMap3: $numMap3") // {Один=1, Два=2, Три=3, Четыре=4, Пять=5}
     val numMap4 = numMap3 - "Четыре"
     println("numMap4: $numMap4") // {Один=1, Два=2, Три=3, Пять=5}
+
+    val upperKey = numMap.mapKeys { (key, _) -> key.uppercase() }
+    println("upperKey: $upperKey") // {ОДИН=1, ДВА=2, ТРИ=3}
+
+    val plus100 = numMap.mapValues { (_, value) -> value + 100 }
+    println("plus100: $plus100") // {Один=101, Два=102, Три=103}
 }

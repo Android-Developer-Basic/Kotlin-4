@@ -15,11 +15,12 @@ fun main() {
     Book.logHashcode = true
     println("Время поиска года в Map по книге: " + measureNanoTime { absYearMap[unwrittenBook] })
 
-    val numMap: Map<Int, String> = mapOf(
-        1 to "Один",
-        2 to "Два",
-        3 to "Три"
+    val numMap: Map<String, Int> = mapOf(
+        "Один" to 1,
+        "Два" to 2,
+        "Три" to 3
     )
-    println("Дай мне написание числа 2: " + numMap[2]) // "Два"
-    println("Дай мне написание числа 5: " + numMap[5]) // null
+    println("Дай мне цифру `Два`: " + numMap["Два"]) // 2
+    println("Дай мне цифру `Пять`: " + numMap["Пять"]) // null
+    println("Дай мне цифру `два`: " + numMap["два"]) // null
 }

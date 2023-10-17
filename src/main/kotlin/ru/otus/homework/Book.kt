@@ -19,7 +19,9 @@ class Book(val title: String, val year: Int) {
     }
 
     override fun hashCode(): Int {
-        println("Hash-code called on: $this")
+        if (logHashcode) {
+            println("Hash-code called on: $this")
+        }
         var result = title.hashCode()
         result = 31 * result + year
         return result
@@ -27,5 +29,9 @@ class Book(val title: String, val year: Int) {
 
     override fun toString(): String {
         return "Book(title='$title', year=$year)"
+    }
+
+    companion object {
+        var logHashcode = false
     }
 }

@@ -53,8 +53,6 @@ fun createAbsList(): List<String> {
     return result
 }
 
-data class Book(val title: String, val year: Int)
-
 internal fun List<String>.mapToBook(): List<Book> {
     val regex = "([^(]+)\\((\\d+)".toRegex()
     return mapNotNull { regex.find(it) }

@@ -24,4 +24,9 @@ fun main() {
     println("numSet3: $numSet3") // [1, 2, 3, 4, 5]
     val numSet4 = numSet3 - 1
     println("numSet4: $numSet4") // [2, 3, 4, 5]
+
+    val diff = setOf(1, 2, 3, 4, 5) - setOf(2, 4)
+    println("diff: $diff") // [1, 3, 5]
+    val sum = setOf(1, 3, 5) + setOf(2, 4)
+    println("sum: $sum") // [1, 3, 5, 2, 4]
 }

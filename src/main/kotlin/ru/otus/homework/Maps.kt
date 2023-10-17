@@ -32,4 +32,8 @@ fun main() {
     println("listToAdd: $listToAdd") // [(Четыре, 444), (Четыре, 44), (Четыре, 4)]
     val numMap2 = numMap + listToAdd
     println("numMap2: $numMap2") // {Один=1, Два=2, Три=3, Четыре=4}
+    val numMap3 = numMap2 + ("Пять" to 5)
+    println("numMap3: $numMap3") // {Один=1, Два=2, Три=3, Четыре=4, Пять=5}
+    val numMap4 = numMap3 - "Четыре"
+    println("numMap4: $numMap4") // {Один=1, Два=2, Три=3, Пять=5}
 }

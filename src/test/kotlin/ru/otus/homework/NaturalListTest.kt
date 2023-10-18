@@ -3,7 +3,7 @@ package ru.otus.homework
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 
-    class NaturalListTest {
+class NaturalListTest {
 
     @Test
     fun returnsRequestedSize() {
@@ -160,6 +160,14 @@ import org.junit.jupiter.api.Test
         assertEquals(
             listOf(1, 2, 3, 4, 5).hashCode(),
             NaturalList(5).hashCode()
+        )
+    }
+
+    @Test
+    fun hashCodeOfEqualNaturalListEquals() {
+        assertEquals(
+            NaturalList(5).hashCode(),
+            listOf(1, 2, 3, 4, 5).hashCode()
         )
     }
 }

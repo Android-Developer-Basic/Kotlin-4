@@ -151,7 +151,15 @@ class NaturalListTest {
     fun equalsToOtherListWithSameValues() {
         assertEquals(
             listOf(1, 2, 3, 4, 5),
-            NaturalList(5)
+            NaturalList(5).toArrayList()
+        )
+    }
+
+    @Test
+    fun equalsToNaturalListWithSameValuesOtherList(){
+        assertEquals(
+            NaturalList(5),
+            listOf(1, 2, 3, 4, 5)
         )
     }
 

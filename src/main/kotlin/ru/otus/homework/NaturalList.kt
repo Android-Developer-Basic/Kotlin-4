@@ -4,6 +4,15 @@ package ru.otus.homework
  * Список натуральных чисел от 1 до n
  * @param n Последнее натуральное число в списке
  */
+
+fun NaturalList.toArrayList() : ArrayList<Int> {
+    val arrayList = ArrayList<Int>()
+    for (item in this) {
+        arrayList.add(item)
+    }
+    return arrayList
+}
+
 class NaturalList(n: Int) : List<Int> {
     override val size: Int = n
 
@@ -60,7 +69,15 @@ class NaturalList(n: Int) : List<Int> {
      * Функция должна возвращать true, если сравнивается с другой реализацией списка тех же чисел
      * Например, NaturalList(5) должен быть равен listOf(1,2,3,4,5)
      */
-    override fun equals(other: Any?): Boolean = false
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (other !is List<*>) return false
+        if (size != other.size) return false
+        for (i in 0 until size) {
+            if (this[i] != other[i]) return false
+        }
+        return true
+    }
 
     /**
      * Функция должна возвращать тот же hash-code, что и список другой реализации тех же чисел

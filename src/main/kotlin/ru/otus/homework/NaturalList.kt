@@ -44,8 +44,18 @@ class NaturalList(n: Int) : List<Int> {
      * Вернуть под-список этого списка, включая [fromIndex] и НЕ включая [toIndex]
      */
     override fun subList(fromIndex: Int, toIndex: Int): List<Int> {
+        validRangeIndexes(fromIndex, toIndex)
         val subListSize = toIndex - fromIndex
         return MutableList(subListSize) { index -> this[fromIndex + index] }
+    }
+
+    private fun validRangeIndexes(fromIndex: Int, toIndex: Int){
+        if (fromIndex < 0)
+            throw IndexOutOfBoundsException("fromIndex cannot be less than 0")
+        if (toIndex > size)
+            throw IndexOutOfBoundsException("toIndex cannot be larger than List size")
+        if (fromIndex > toIndex)
+            throw IllegalArgumentException("fromIndex cannot be larger than toIndex")
     }
 
     /**

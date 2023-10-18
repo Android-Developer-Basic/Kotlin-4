@@ -2,6 +2,7 @@ package ru.otus.homework
 
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertThrows
 
 class NaturalListTest {
 
@@ -133,6 +134,30 @@ class NaturalListTest {
         assertEquals(2, subList.size)
         assertEquals(2, subList[0])
         assertEquals(3, subList[1])
+    }
+
+    @Test
+    fun sublistRangeValidLessThen0() {
+        val list = NaturalList(5)
+        assertThrows<IndexOutOfBoundsException> {
+            val subList = list.subList(-1, 3)
+        }
+    }
+
+    @Test
+    fun sublistRangeValidLargerThenListSize() {
+        val list = NaturalList(5)
+        assertThrows<IndexOutOfBoundsException> {
+            val subList = list.subList(0, 6)
+        }
+    }
+
+    @Test
+    fun sublistRangeValid() {
+        val list = NaturalList(5)
+        assertThrows<IllegalArgumentException> {
+            val subList = list.subList(4, 1)
+        }
     }
 
     @Test

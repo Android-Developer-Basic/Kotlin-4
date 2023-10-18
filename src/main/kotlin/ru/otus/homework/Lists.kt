@@ -2,6 +2,7 @@ package ru.otus.homework
 
 fun main() {
     val abs: List<String> = createAbsList()
+
     val absBooks: List<Book> = abs.mapToBook()
     println("Список книг:")
     println(absBooks)

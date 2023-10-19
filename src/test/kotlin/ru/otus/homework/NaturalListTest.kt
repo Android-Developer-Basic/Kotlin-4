@@ -2,8 +2,9 @@ package ru.otus.homework
 
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertThrows
 
-    class NaturalListTest {
+class NaturalListTest {
 
     @Test
     fun returnsRequestedSize() {
@@ -136,6 +137,30 @@ import org.junit.jupiter.api.Test
     }
 
     @Test
+    fun sublistRangeValidLessThen0() {
+        val list = NaturalList(5)
+        assertThrows<IndexOutOfBoundsException> {
+            val subList = list.subList(-1, 3)
+        }
+    }
+
+    @Test
+    fun sublistRangeValidLargerThenListSize() {
+        val list = NaturalList(5)
+        assertThrows<IndexOutOfBoundsException> {
+            val subList = list.subList(0, 6)
+        }
+    }
+
+    @Test
+    fun sublistRangeValid() {
+        val list = NaturalList(5)
+        assertThrows<IllegalArgumentException> {
+            val subList = list.subList(4, 1)
+        }
+    }
+
+    @Test
     fun returnsTrueIfListContainsAllNumbers() {
         val list = NaturalList(5)
         assertTrue(list.containsAll(listOf(1, 2, 3, 4, 5)))
@@ -151,7 +176,15 @@ import org.junit.jupiter.api.Test
     fun equalsToOtherListWithSameValues() {
         assertEquals(
             listOf(1, 2, 3, 4, 5),
-            NaturalList(5)
+            NaturalList(5).toArrayList()
+        )
+    }
+
+    @Test
+    fun equalsToNaturalListWithSameValuesOtherList(){
+        assertEquals(
+            NaturalList(5),
+            listOf(1, 2, 3, 4, 5)
         )
     }
 
@@ -168,6 +201,14 @@ import org.junit.jupiter.api.Test
         assertEquals(
             listOf(1, 2, 3, 4, 5).hashCode(),
             NaturalList(5).hashCode()
+        )
+    }
+
+    @Test
+    fun hashCodeOfEqualNaturalListEquals() {
+        assertEquals(
+            NaturalList(5).hashCode(),
+            listOf(1, 2, 3, 4, 5).hashCode()
         )
     }
 }

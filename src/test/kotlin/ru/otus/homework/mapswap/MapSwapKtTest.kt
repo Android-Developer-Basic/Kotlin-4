@@ -20,4 +20,38 @@ class MapSwapKtTest {
             source.swap()
         )
     }
+
+    @Test
+    fun swapsForEachIntAndString() {
+        val source = mapOf(
+            1 to "one",
+            2 to "two",
+            3 to "three"
+        )
+        assertEquals(
+            mapOf(
+                "one" to 1,
+                "two" to 2,
+                "three" to 3
+            ),
+            source.swapForEach()
+        )
+    }
+
+    @Test
+    fun swapsMapValuesIntAndString() {
+        val source = mapOf(
+            1 to "one",
+            2 to "two",
+            3 to "three"
+        )
+        assertEquals(
+            mapOf(
+                "one" to 1,
+                "two" to 2,
+                "three" to 3
+            ),
+            source.swapMapValues()
+        )
+    }
 }

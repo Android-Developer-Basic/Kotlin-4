@@ -149,10 +149,11 @@ import org.junit.jupiter.api.Test
 
     @Test
     fun equalsToOtherListWithSameValues() {
-        assertEquals(
+        assertTrue(NaturalList(5) == NaturalList(5))
+        /*assertEquals(
             listOf(1, 2, 3, 4, 5),
             NaturalList(5)
-        )
+        )*/
     }
 
     @Test

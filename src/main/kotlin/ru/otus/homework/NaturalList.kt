@@ -77,7 +77,7 @@ private class NaturalListIterator(private val n: Int, index: Int = 0) : ListIter
     override fun hasNext(): Boolean = index < n
     override fun hasPrevious(): Boolean = index > 0
     override fun next(): Int = if (hasNext()) {
-        index++
+        ++index
     } else {
         throw NoSuchElementException()
     }

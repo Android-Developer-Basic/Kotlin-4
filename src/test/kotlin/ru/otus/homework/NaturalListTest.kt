@@ -69,7 +69,7 @@ import org.junit.jupiter.api.Test
         val iterator = list.listIterator(1)
 
         assertTrue(iterator.hasNext())
-        assertEquals(1, iterator.next())
+        assertEquals(2, iterator.next())
 
         assertFalse(iterator.hasNext())
         assertThrows(NoSuchElementException::class.java) { iterator.next() }

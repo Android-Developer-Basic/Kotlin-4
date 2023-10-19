@@ -41,7 +41,7 @@ class NaturalList(n: Int) : List<Int> {
      * Returns true if list contains all numbers in the collection
      */
     override fun containsAll(elements: Collection<Int>): Boolean =
-        elements.maxOrNull()?.let { size >= it } ?: true
+        elements.all { it in 1..size }
 
     override fun toString(): String {
         return "NaturalList(1..$size)"

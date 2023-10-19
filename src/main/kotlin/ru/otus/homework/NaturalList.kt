@@ -35,14 +35,27 @@ class NaturalList(n: Int) : List<Int> {
      * Вернуть под-список этого списка, включая [fromIndex] и НЕ включая [toIndex]
      */
     override fun subList(fromIndex: Int, toIndex: Int): List<Int> {
-        TODO("Not yet implemented")
+        if (fromIndex < 0 || toIndex > size || fromIndex > toIndex) {
+            throw IndexOutOfBoundsException("Invalid indices: fromIndex = $fromIndex, toIndex = $toIndex, size = $size")
+        }
+
+        val result = mutableListOf<Int>()
+        for (i in fromIndex until toIndex) {
+            result.add(get(i))
+        }
+        return result
     }
 
     /**
      * Returns true if list contains all numbers in the collection
      */
     override fun containsAll(elements: Collection<Int>): Boolean {
-        TODO("Not yet implemented")
+        for (element in elements) {
+            if (indexOf(element) == -1) {
+                return false
+            }
+        }
+        return true
     }
 
     override fun toString(): String {
@@ -53,13 +66,38 @@ class NaturalList(n: Int) : List<Int> {
      * Функция должна возвращать true, если сравнивается с другой реализацией списка тех же чисел
      * Например, NaturalList(5) должен быть равен listOf(1,2,3,4,5)
      */
-    override fun equals(other: Any?): Boolean = false
+
+    override fun equals(other: Any?): Boolean {
+        if (other === this) return true
+        if (other !is List<*>) return false
+
+
+        val iter1 = listIterator()
+        val iter2 = other.listIterator()
+
+        while (iter1.hasNext() && iter2.hasNext()) {
+            val o1 = iter1.next()
+            val o2 = iter2.next()
+            if (o1 != o2 && (o1 != o2)) {
+                return false
+            }
+        }
+
+        return !iter1.hasNext() && !iter2.hasNext()
+
+    }
 
     /**
      * Функция должна возвращать тот же hash-code, что и список другой реализации тех же чисел
      * Например, NaturalList(5).hashCode() должен быть равен listOf(1,2,3,4,5).hashCode()
      */
-    override fun hashCode(): Int = -1
+    override fun hashCode(): Int {
+        var hashCode = 1
+        for (e in this) hashCode = 31 * hashCode + (e.hashCode())
+        return hashCode
+    }
+
+
 }
 
 private class NaturalIterator(private val n: Int) : Iterator<Int> {

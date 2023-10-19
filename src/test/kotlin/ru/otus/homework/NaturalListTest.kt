@@ -155,6 +155,11 @@ import org.junit.jupiter.api.Test
         )
     }
 
+        @Test
+        fun otherListEqualsWithSameValues(){
+            assertEquals(NaturalList(5),listOf(1,2,3,4,5))
+        }
+
     @Test
     fun hashCodeOfEqualListEquals() {
         assertEquals(

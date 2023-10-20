@@ -35,14 +35,17 @@ class NaturalList(n: Int) : List<Int> {
      * Вернуть под-список этого списка, включая [fromIndex] и НЕ включая [toIndex]
      */
     override fun subList(fromIndex: Int, toIndex: Int): List<Int> {
-        TODO("Not yet implemented")
+        if (fromIndex < 0 || toIndex > size || fromIndex > toIndex) {
+            throw IndexOutOfBoundsException("Invalid sublist range: [$fromIndex, $toIndex). List size: $size")
+        }
+        return NaturalList(toIndex - fromIndex)
     }
 
     /**
      * Returns true if list contains all numbers in the collection
      */
     override fun containsAll(elements: Collection<Int>): Boolean {
-        TODO("Not yet implemented")
+        return elements.all { it in this }
     }
 
     override fun toString(): String {

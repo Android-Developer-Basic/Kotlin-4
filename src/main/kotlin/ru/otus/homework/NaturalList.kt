@@ -38,7 +38,8 @@ class NaturalList(n: Int) : List<Int> {
         if (fromIndex < 0 || toIndex > size || fromIndex > toIndex) {
             throw IndexOutOfBoundsException("Invalid sublist range: [$fromIndex, $toIndex). List size: $size")
         }
-        return NaturalList(toIndex - fromIndex)
+        val sublistSize = toIndex - fromIndex
+        return NaturalList(sublistSize).mapIndexed { index, _ -> this[fromIndex + index] }
     }
 
     /**

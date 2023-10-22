@@ -37,7 +37,13 @@ class NaturalList(n: Int) : List<Int> {
      * Вернуть под-список этого списка, включая [fromIndex] и НЕ включая [toIndex]
      */
     override fun subList(fromIndex: Int, toIndex: Int): List<Int> {
-        return this.filterIndexed { index, _ -> (fromIndex<=index) && (index<toIndex) }
+        // return this.drop(fromIndex).dropLast(toIndex-1)
+        // return this.filterIndexed { index, _ -> (fromIndex<=index) && (index<toIndex) }
+
+        val result: MutableList<Int> = ArrayList()
+        for (i in fromIndex..<toIndex)
+            result.add(this[i])
+        return result
     }
 
     /**
@@ -56,12 +62,25 @@ class NaturalList(n: Int) : List<Int> {
      * Например, NaturalList(5) должен быть равен listOf(1,2,3,4,5)
      */
     override fun equals(other: Any?): Boolean {
-        if (this === other) return true
-        if (other is List<*>) {
-            if (size != other.size) return false
-            return true
+        return if (this === other) {
+            true
+        } else if (other is List<*>)  {
+            if (other.size != size) {
+                false
+            } else {
+                // сравним все эелементы
+                for (i in 0 until other.size) {
+                    val e1: Any = this.get(i)
+                    val e2: Any? = other.get(i)
+                    if ((e2 == null) || (e1 != e2)) {
+                             return false
+                    }
+                }
+                true
+            }
+        } else {
+            false
         }
-        return false
     }
 
     /**

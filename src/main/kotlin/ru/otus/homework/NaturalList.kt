@@ -35,14 +35,27 @@ class NaturalList(n: Int) : List<Int> {
      * Вернуть под-список этого списка, включая [fromIndex] и НЕ включая [toIndex]
      */
     override fun subList(fromIndex: Int, toIndex: Int): List<Int> {
-        TODO("Not yet implemented")
+        val sublist = ArrayList<Int>()
+        for (i in fromIndex until toIndex) {
+            sublist.add(this[i])
+        }
+        return sublist
     }
 
     /**
      * Returns true if list contains all numbers in the collection
      */
     override fun containsAll(elements: Collection<Int>): Boolean {
-        TODO("Not yet implemented")
+        var contains = false
+        elements.forEach {
+            if (this.contains(it)) {
+                contains = true
+            } else {
+                contains = false
+                return false
+            }
+        }
+        return contains
     }
 
     override fun toString(): String {
@@ -53,13 +66,39 @@ class NaturalList(n: Int) : List<Int> {
      * Функция должна возвращать true, если сравнивается с другой реализацией списка тех же чисел
      * Например, NaturalList(5) должен быть равен listOf(1,2,3,4,5)
      */
-    override fun equals(other: Any?): Boolean = false
+    override fun equals(other: Any?): Boolean {
+        if (other === this) return true
+        if (other !is List<*>) return false
+
+        return orderedEquals(this, other)
+    }
+
+    private fun orderedEquals(c: Collection<*>, other: Collection<*>): Boolean {
+        if (c.size != other.size) return false
+
+        val otherIterator = other.iterator()
+        for (elem in c) {
+            val elemOther = otherIterator.next()
+            if (elem != elemOther) {
+                return false
+            }
+        }
+        return true
+    }
 
     /**
      * Функция должна возвращать тот же hash-code, что и список другой реализации тех же чисел
      * Например, NaturalList(5).hashCode() должен быть равен listOf(1,2,3,4,5).hashCode()
      */
-    override fun hashCode(): Int = -1
+    override fun hashCode(): Int = orderedHashCode(this)
+
+    private fun orderedHashCode(c: Collection<*>): Int {
+        var hashCode = 1
+        for (e in c) {
+            hashCode = 31 * hashCode + (e?.hashCode() ?: 0)
+        }
+        return hashCode
+    }
 }
 
 private class NaturalIterator(private val n: Int) : Iterator<Int> {

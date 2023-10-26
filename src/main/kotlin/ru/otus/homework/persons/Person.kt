@@ -6,4 +6,7 @@ package ru.otus.homework.persons
  * @property surname Фамилия
  * @property age Возраст
  */
-data class Person(val name: String, val surname: String, val age: Int)
+data class Person(val name: String, val surname: String, val age: Int
+
+
+)

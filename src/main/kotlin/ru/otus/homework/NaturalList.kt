@@ -35,14 +35,22 @@ class NaturalList(n: Int) : List<Int> {
      * Вернуть под-список этого списка, включая [fromIndex] и НЕ включая [toIndex]
      */
     override fun subList(fromIndex: Int, toIndex: Int): List<Int> {
-        TODO("Not yet implemented")
+        val result = mutableListOf<Int>()
+        for (i in fromIndex until toIndex) {
+            result.add(this[i])
+        }
+        return result
     }
 
     /**
      * Returns true if list contains all numbers in the collection
      */
     override fun containsAll(elements: Collection<Int>): Boolean {
-        TODO("Not yet implemented")
+        for (element in elements) {
+            if (!this.contains(element))
+                return false
+        }
+        return true
     }
 
     override fun toString(): String {
@@ -53,13 +61,27 @@ class NaturalList(n: Int) : List<Int> {
      * Функция должна возвращать true, если сравнивается с другой реализацией списка тех же чисел
      * Например, NaturalList(5) должен быть равен listOf(1,2,3,4,5)
      */
-    override fun equals(other: Any?): Boolean = false
+    override fun equals(other: Any?): Boolean {
+        if (other === null || other !is List<*>) return false
+        if (this.size != other.size) return false
+        for (i in this.indices) {
+            if (this[i] != other[i]) return false
+        }
+        return true
+
+    }
 
     /**
      * Функция должна возвращать тот же hash-code, что и список другой реализации тех же чисел
      * Например, NaturalList(5).hashCode() должен быть равен listOf(1,2,3,4,5).hashCode()
      */
-    override fun hashCode(): Int = -1
+    override fun hashCode(): Int {
+        var result = 1
+        for (element in this) {
+            result = 31 * result + element.hashCode()
+        }
+        return result
+    }
 }
 
 private class NaturalIterator(private val n: Int) : Iterator<Int> {
@@ -73,7 +95,7 @@ private class NaturalIterator(private val n: Int) : Iterator<Int> {
 }
 
 private class NaturalListIterator(private val n: Int, index: Int = 0) : ListIterator<Int> {
-    private var index:Int = index.coerceIn(0, n - 1)
+    private var index: Int = index.coerceIn(0, n - 1)
     override fun hasNext(): Boolean = index < n
     override fun hasPrevious(): Boolean = index > 0
     override fun next(): Int = if (hasNext()) {
@@ -81,11 +103,13 @@ private class NaturalListIterator(private val n: Int, index: Int = 0) : ListIter
     } else {
         throw NoSuchElementException()
     }
+
     override fun nextIndex(): Int = index
     override fun previous(): Int = if (hasPrevious()) {
         index--
     } else {
         throw NoSuchElementException()
     }
+
     override fun previousIndex(): Int = index
 }

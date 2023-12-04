@@ -65,7 +65,17 @@ class NaturalList(n: Int) : List<Int> {
      * Функция должна возвращать true, если сравнивается с другой реализацией списка тех же чисел
      * Например, NaturalList(5) должен быть равен listOf(1,2,3,4,5)
      */
-    override fun equals(other: Any?): Boolean = false
+    override fun equals(other: Any?): Boolean {
+        if (other === this) return true
+        if (other !is List<*>) return false
+        if (this.size != other.size) return false
+
+        for(i in this.indices) {
+            if (this[i] == other[i]) continue
+            else return false
+        }
+        return true
+    }
 
     /**
      * Функция должна возвращать тот же hash-code, что и список другой реализации тех же чисел

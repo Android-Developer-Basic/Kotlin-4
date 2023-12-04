@@ -45,7 +45,7 @@ class NaturalList(n: Int) : List<Int> {
      */
     override fun containsAll(elements: Collection<Int>): Boolean {
         for(it in this) {
-            var isContain:Boolean = false
+            var isContain = false
             for(it2 in elements) {
                 if (it == it2) {
                     isContain = true

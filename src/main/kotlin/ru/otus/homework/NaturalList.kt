@@ -84,7 +84,7 @@ class NaturalList(n: Int) : List<Int> {
     override fun hashCode(): Int {
         var hashCode = 1
         for (e in this) {
-            hashCode = 31 * hashCode + (e?.hashCode() ?: 0)
+            hashCode = 31 * hashCode + (e.hashCode())
         }
         return hashCode
     }

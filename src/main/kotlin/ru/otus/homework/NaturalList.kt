@@ -44,9 +44,9 @@ class NaturalList(n: Int) : List<Int> {
      * Returns true if list contains all numbers in the collection
      */
     override fun containsAll(elements: Collection<Int>): Boolean {
-        for(it in this) {
+        for(it in elements) {
             var isContain = false
-            for(it2 in elements) {
+            for(it2 in this) {
                 if (it == it2) {
                     isContain = true
                     break

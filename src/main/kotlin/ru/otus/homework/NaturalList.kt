@@ -1,5 +1,7 @@
 package ru.otus.homework
 
+import org.w3c.dom.ls.LSInput
+
 /**
  * Список натуральных чисел от 1 до n
  * @param n Последнее натуральное число в списке
@@ -35,14 +37,38 @@ class NaturalList(n: Int) : List<Int> {
      * Вернуть под-список этого списка, включая [fromIndex] и НЕ включая [toIndex]
      */
     override fun subList(fromIndex: Int, toIndex: Int): List<Int> {
-        TODO("Not yet implemented")
+        if(fromIndex >= this.count() || toIndex >= this.count())
+            throw IndexOutOfBoundsException()
+
+        val result: MutableList<Int> = mutableListOf()
+        for (index in fromIndex until toIndex){
+            result.add(this[index])
+        }
+
+        return result
     }
 
     /**
      * Returns true if list contains all numbers in the collection
      */
     override fun containsAll(elements: Collection<Int>): Boolean {
-        TODO("Not yet implemented")
+        var result: Boolean
+        var r = elements
+        var s = this as Collection<Int>
+        if(this.count() > elements.count()) {
+            r = this
+            s = elements
+        }
+        for (item in r){
+            result = false
+            for (itemEl in s)
+                if(item == itemEl) {
+                    result = true
+                    break
+                }
+            if(!result) return false
+        }
+        return true
     }
 
     override fun toString(): String {
@@ -53,13 +79,37 @@ class NaturalList(n: Int) : List<Int> {
      * Функция должна возвращать true, если сравнивается с другой реализацией списка тех же чисел
      * Например, NaturalList(5) должен быть равен listOf(1,2,3,4,5)
      */
-    override fun equals(other: Any?): Boolean = false
+    override fun equals(other: Any?): Boolean {
+        if(other == null) return false
+
+        if(other === this) return true
+
+        if (other !is List<*>)
+            return false
+
+        other as List<Int>
+
+        if (other.size != this.size)
+            return false
+
+        for (index in other.indices)
+            if(other[index] != this[index])
+                return false
+
+        return true
+    }
 
     /**
      * Функция должна возвращать тот же hash-code, что и список другой реализации тех же чисел
      * Например, NaturalList(5).hashCode() должен быть равен listOf(1,2,3,4,5).hashCode()
      */
-    override fun hashCode(): Int = -1
+    override fun hashCode(): Int {
+        var result = 1
+        for (item in this) {
+            result = 31 * result + item
+        }
+        return result
+    }
 }
 
 private class NaturalIterator(private val n: Int) : Iterator<Int> {

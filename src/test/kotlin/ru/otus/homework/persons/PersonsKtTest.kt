@@ -25,7 +25,7 @@ class PersonsKtTest {
     @Test
     fun sortsByNames() {
         assertEquals(
-            listOf(P1, P4, P5, P2, P3),
+            listOf(P1, P2, P3, P4, P5),
             persons.sortByName()
         )
     }

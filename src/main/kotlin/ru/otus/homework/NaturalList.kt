@@ -36,7 +36,7 @@ class NaturalList(n: Int) : List<Int> {
      */
     override fun subList(fromIndex: Int, toIndex: Int): List<Int> {
         if (fromIndex > toIndex || toIndex >= size) {
-            throw IndexOutOfBoundsException()
+            throw NoSuchElementException()
         }
 
         var result = mutableListOf<Int>()

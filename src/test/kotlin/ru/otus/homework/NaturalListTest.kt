@@ -135,6 +135,21 @@ import org.junit.jupiter.api.Test
         assertEquals(3, subList[1])
     }
 
+        @Test
+        fun returnsValidSublist2() {
+            var list = NaturalList(5)
+            var subList = list.subList(-100, 3)
+            assertEquals(3, subList.size)
+            assertEquals(1, subList[0])
+            assertEquals(3, subList[2])
+
+            list = NaturalList(5)
+            subList = list.subList(3, 100)
+            assertEquals(2, subList.size)
+            assertEquals(4, subList[0])
+            assertEquals(5, subList[1])
+        }
+
     @Test
     fun returnsTrueIfListContainsAllNumbers() {
         val list = NaturalList(5)

@@ -29,4 +29,12 @@ class PersonsKtTest {
             persons.sortByName()
         )
     }
+
+    @Test
+    fun sortsByNames2() {
+        assertEquals(
+            listOf(P1, P2, P3, P4, P5),
+            persons.sortByNameComparator()
+        )
+    }
 }

@@ -35,14 +35,26 @@ class NaturalList(n: Int) : List<Int> {
      * Вернуть под-список этого списка, включая [fromIndex] и НЕ включая [toIndex]
      */
     override fun subList(fromIndex: Int, toIndex: Int): List<Int> {
-        TODO("Not yet implemented")
+        val result = mutableListOf<Int>()
+        for (i in fromIndex until toIndex) {
+            result.add(get(i))
+        }
+        return result
     }
 
     /**
      * Returns true if list contains all numbers in the collection
      */
     override fun containsAll(elements: Collection<Int>): Boolean {
-        TODO("Not yet implemented")
+
+        for (element in elements) {
+            if (element in this) {
+                continue
+            }
+            else
+                return false
+        }
+        return true
     }
 
     override fun toString(): String {
@@ -53,14 +65,49 @@ class NaturalList(n: Int) : List<Int> {
      * Функция должна возвращать true, если сравнивается с другой реализацией списка тех же чисел
      * Например, NaturalList(5) должен быть равен listOf(1,2,3,4,5)
      */
-    override fun equals(other: Any?): Boolean = false
+    override fun equals(other: Any?): Boolean {
+        val otherList = other as? List<*>
+        if (otherList != null) {
+            if (this.size == other?.size) {
+                for (i in 0 until this.size) {
+                    if (this[i] != other[i]) {
+                        return false
+                    }
+                }
+                return true
+            }
+            else
+                return false
+        }
+        else
+            return false
+    }
+
 
     /**
      * Функция должна возвращать тот же hash-code, что и список другой реализации тех же чисел
      * Например, NaturalList(5).hashCode() должен быть равен listOf(1,2,3,4,5).hashCode()
      */
-    override fun hashCode(): Int = -1
+    override fun hashCode(): Int {
+        val list = this.toList()
+        var hashCode = 0
+        println(list)
+        if (list.size == 1)
+            return list[0].hashCode() + 31
+        else {
+            for (element in list) {
+                hashCode = if (list.indexOf(element) == 0)
+                    (31 + element.hashCode())
+                else
+                    hashCode * 31 + element.hashCode() // (31 + 1) * 31 + 2
+            }
+        }
+        return hashCode
+
+
 }
+
+
 
 private class NaturalIterator(private val n: Int) : Iterator<Int> {
     private var index = 0
@@ -88,4 +135,5 @@ private class NaturalListIterator(private val n: Int, index: Int = 0) : ListIter
         throw NoSuchElementException()
     }
     override fun previousIndex(): Int = index
+}
 }

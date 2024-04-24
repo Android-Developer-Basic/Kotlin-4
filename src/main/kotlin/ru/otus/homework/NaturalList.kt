@@ -59,8 +59,9 @@ class NaturalList(n: Int) : List<Int> {
     override fun equals(other: Any?): Boolean {
             if (other === this) return true
             if (other !is List<*>) return false
-
-            return other.equals(this)
+            if (other.size != this.size) return false
+            this.indices.forEach{ i -> if (this[i] != other[i]) return false }
+            return true
     }
 
     /**

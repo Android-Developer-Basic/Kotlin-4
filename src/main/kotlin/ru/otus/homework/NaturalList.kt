@@ -48,13 +48,7 @@ class NaturalList(n: Int) : List<Int> {
         return "NaturalList(1..$size)"
     }
 
-    override fun equals(other: Any?): Boolean {
-        if (other === this) return true
-        if (other !is Collection<*>) return false
-        if (other.size != size) return false
-
-        return containsAll(other)
-    }
+    override fun equals(other: Any?): Boolean = (1 .. size).toList() == other
 
     override fun hashCode(): Int {
         var hashCode = 1

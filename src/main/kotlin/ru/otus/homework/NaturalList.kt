@@ -41,9 +41,8 @@ class NaturalList(n: Int) : List<Int> {
     /**
      * Returns true if list contains all numbers in the collection
      */
-    override fun containsAll(elements: Collection<Int>): Boolean {
-        return this.toSet() == elements.toSet()
-    }
+    override fun containsAll(elements: Collection<Int>): Boolean =
+        (1..size).toList().containsAll(elements)
 
     override fun toString(): String {
         return "NaturalList(1..$size)"

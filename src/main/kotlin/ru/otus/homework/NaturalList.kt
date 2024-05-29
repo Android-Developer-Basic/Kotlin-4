@@ -35,7 +35,7 @@ class NaturalList(n: Int) : List<Int> {
      * Вернуть под-список этого списка, включая [fromIndex] и НЕ включая [toIndex]
      */
     override fun subList(fromIndex: Int, toIndex: Int): List<Int> {
-        return this.toList().subList(fromIndex, toIndex)
+        return (1..size).toList().subList(fromIndex, toIndex)
     }
 
     /**

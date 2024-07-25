@@ -1,9 +1,11 @@
 package ru.otus.homework.persons
 
+import ru.otus.homework.Book
+
 /**
  * Отсортировать список персон по возрасту в порядке убывания
  */
-fun List<Person>.sortByAge(): List<Person> = TODO("Доделать sortByAge")
+fun List<Person>.sortByAge(): List<Person> = sortedBy { it.age }.reversed()
 
 /**
  * Отсортировать список персон по фамилии

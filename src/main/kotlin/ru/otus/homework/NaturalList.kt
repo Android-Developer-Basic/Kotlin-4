@@ -39,13 +39,17 @@ class NaturalList(n: Int) : List<Int> {
         require(fromIndex <= toIndex)
         require(toIndex <= size)
 
-        return arrayListOf(fromIndex + 1, toIndex)
+        return (fromIndex + 1..toIndex).toList()
     }
 
     /**
      * Returns true if list contains all numbers in the collection
      */
-    override fun containsAll(elements: Collection<Int>): Boolean = elements.max() <= size
+    override fun containsAll(elements: Collection<Int>): Boolean {
+        require(elements.min() >= 1)
+
+        return elements.max() <= size
+    }
 
     override fun toString(): String {
         return "NaturalList(1..$size)"

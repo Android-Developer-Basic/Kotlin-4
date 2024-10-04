@@ -6,6 +6,7 @@ package ru.otus.homework
  */
 class NaturalList(n: Int) : List<Int> {
     override val size: Int = n
+    private var hash: Int  = 1
 
     override fun get(index: Int): Int = if (index in 0 until size) {
         index + 1
@@ -35,14 +36,16 @@ class NaturalList(n: Int) : List<Int> {
      * Вернуть под-список этого списка, включая [fromIndex] и НЕ включая [toIndex]
      */
     override fun subList(fromIndex: Int, toIndex: Int): List<Int> {
-        TODO("Not yet implemented")
+        return (fromIndex+1..toIndex).toList()
     }
 
     /**
      * Returns true if list contains all numbers in the collection
      */
     override fun containsAll(elements: Collection<Int>): Boolean {
-        TODO("Not yet implemented")
+        elements.forEach { if (!contains(it)) return false }
+
+        return true
     }
 
     override fun toString(): String {
@@ -53,13 +56,28 @@ class NaturalList(n: Int) : List<Int> {
      * Функция должна возвращать true, если сравнивается с другой реализацией списка тех же чисел
      * Например, NaturalList(5) должен быть равен listOf(1,2,3,4,5)
      */
-    override fun equals(other: Any?): Boolean = false
+    override fun equals(other: Any?): Boolean {
+        if (other !is List<*>) return false
+        if(other.size != size) return false
+
+        for (i in other.indices) {
+            if (other[i] != i+1) return false
+        }
+
+        return true
+    }
 
     /**
      * Функция должна возвращать тот же hash-code, что и список другой реализации тех же чисел
      * Например, NaturalList(5).hashCode() должен быть равен listOf(1,2,3,4,5).hashCode()
      */
-    override fun hashCode(): Int = -1
+    override fun hashCode(): Int {
+        if (hash == 1 && size > 1) {
+            hash = (1..size).toList().hashCode()
+        }
+
+        return hash
+    }
 }
 
 private class NaturalIterator(private val n: Int) : Iterator<Int> {

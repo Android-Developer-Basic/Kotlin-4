@@ -72,7 +72,7 @@ class NaturalList(n: Int) : List<Int> {
      * Например, NaturalList(5).hashCode() должен быть равен listOf(1,2,3,4,5).hashCode()
      */
     override fun hashCode(): Int {
-        if (hash == 1 && size > 1) {
+        if (hash == 1) {
             hash = (1..size).toList().hashCode()
         }
 

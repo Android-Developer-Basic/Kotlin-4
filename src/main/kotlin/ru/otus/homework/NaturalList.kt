@@ -60,7 +60,7 @@ class NaturalList(n: Int) : List<Int> {
      */
     override fun equals(other: Any?): Boolean {
         if(other is List<*>) {
-            return other.containsAll(this)
+            return other.containsAll(this) && containsAll(other)
         }
         return false
     }

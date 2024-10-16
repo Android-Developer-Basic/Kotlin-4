@@ -59,10 +59,14 @@ class NaturalList(n: Int) : List<Int> {
      * Например, NaturalList(5) должен быть равен listOf(1,2,3,4,5)
      */
     override fun equals(other: Any?): Boolean {
-        if(other is List<*>) {
-            return other.containsAll(this) && containsAll(other)
-        }
-        return false
+        if (other === this) return true
+
+        other as List<*>
+
+        if (!other.containsAll(this)) return false
+        if (!containsAll(other)) return false
+
+        return true
     }
 
     /**

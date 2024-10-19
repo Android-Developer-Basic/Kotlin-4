@@ -36,11 +36,9 @@ class NaturalList(n: Int) : List<Int> {
         return cuttingList
     }
 
-    /**
-     * Returns true if list contains all numbers in the collection
-     */
     override fun containsAll(elements: Collection<Int>): Boolean {
-        TODO("Not yet implemented")
+        val isContains = this.toList().containsAll(elements)
+        return isContains
     }
 
     override fun toString(): String {

@@ -45,11 +45,7 @@ class NaturalList(n: Int) : List<Int> {
         return "NaturalList(1..$size)"
     }
 
-    /**
-     * Функция должна возвращать true, если сравнивается с другой реализацией списка тех же чисел
-     * Например, NaturalList(5) должен быть равен listOf(1,2,3,4,5)
-     */
-    override fun equals(other: Any?): Boolean = false
+    override fun equals(other: Any?): Boolean = this.toList() == other
 
     /**
      * Функция должна возвращать тот же hash-code, что и список другой реализации тех же чисел

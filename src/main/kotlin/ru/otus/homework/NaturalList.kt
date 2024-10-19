@@ -31,15 +31,11 @@ class NaturalList(n: Int) : List<Int> {
 
     override fun lastIndexOf(element: Int): Int = indexOf(element)
 
-    override fun subList(fromIndex: Int, toIndex: Int): List<Int> {
-        val cuttingList = this.toList().slice(fromIndex until toIndex)
-        return cuttingList
-    }
+    override fun subList(fromIndex: Int, toIndex: Int): List<Int> =
+        this.toList().slice(fromIndex until toIndex)
 
-    override fun containsAll(elements: Collection<Int>): Boolean {
-        val isContains = this.toList().containsAll(elements)
-        return isContains
-    }
+    override fun containsAll(elements: Collection<Int>): Boolean =
+        this.toList().containsAll(elements)
 
     override fun toString(): String {
         return "NaturalList(1..$size)"

@@ -1,9 +1,5 @@
 package ru.otus.homework
 
-/**
- * Список натуральных чисел от 1 до n
- * @param n Последнее натуральное число в списке
- */
 class NaturalList(n: Int) : List<Int> {
     override val size: Int = n
 
@@ -43,11 +39,7 @@ class NaturalList(n: Int) : List<Int> {
 
     override fun equals(other: Any?): Boolean = this.toList() == other
 
-    /**
-     * Функция должна возвращать тот же hash-code, что и список другой реализации тех же чисел
-     * Например, NaturalList(5).hashCode() должен быть равен listOf(1,2,3,4,5).hashCode()
-     */
-    override fun hashCode(): Int = -1
+    override fun hashCode(): Int = this.toList().hashCode()
 }
 
 private class NaturalIterator(private val n: Int) : Iterator<Int> {

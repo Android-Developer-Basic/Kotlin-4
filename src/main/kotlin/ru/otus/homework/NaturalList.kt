@@ -35,14 +35,30 @@ class NaturalList(n: Int) : List<Int> {
      * Вернуть под-список этого списка, включая [fromIndex] и НЕ включая [toIndex]
      */
     override fun subList(fromIndex: Int, toIndex: Int): List<Int> {
-        TODO("Not yet implemented")
+        if (fromIndex < 0 || fromIndex >= this.size) throw IndexOutOfBoundsException("Некорректный начальный индекс")
+        if (toIndex < 0 || toIndex >= this.size)  throw IndexOutOfBoundsException("Некорректный конечный индекс")
+
+        val result = mutableListOf<Int>()
+        for (i in fromIndex until toIndex) {
+            result.add(this[i])
+        }
+
+        return result
     }
 
     /**
      * Returns true if list contains all numbers in the collection
      */
     override fun containsAll(elements: Collection<Int>): Boolean {
-        TODO("Not yet implemented")
+
+        for (i in elements){
+            var flag = false
+            for (j in this){
+                if (i==j) flag = true
+            }
+            if (!flag) return false
+        }
+        return true
     }
 
     override fun toString(): String {
@@ -53,13 +69,23 @@ class NaturalList(n: Int) : List<Int> {
      * Функция должна возвращать true, если сравнивается с другой реализацией списка тех же чисел
      * Например, NaturalList(5) должен быть равен listOf(1,2,3,4,5)
      */
-    override fun equals(other: Any?): Boolean = false
+    override fun equals(other: Any?): Boolean {
+        if (other !is List<*>) return false
+
+        if (other.size != this.size) return false
+
+        for (i in 0..<size){
+            if (other[i] != this[i]) return false
+        }
+
+        return true
+    }
 
     /**
      * Функция должна возвращать тот же hash-code, что и список другой реализации тех же чисел
      * Например, NaturalList(5).hashCode() должен быть равен listOf(1,2,3,4,5).hashCode()
      */
-    override fun hashCode(): Int = -1
+    override fun hashCode(): Int = this.toList().hashCode()
 }
 
 private class NaturalIterator(private val n: Int) : Iterator<Int> {

@@ -35,14 +35,25 @@ class NaturalList(n: Int) : List<Int> {
      * Вернуть под-список этого списка, включая [fromIndex] и НЕ включая [toIndex]
      */
     override fun subList(fromIndex: Int, toIndex: Int): List<Int> {
-        TODO("Not yet implemented")
+        val result: MutableList<Int> = mutableListOf<Int>()
+        for(i in fromIndex ..< toIndex){
+            result.add(this[i])
+        }
+        return result.toList()
     }
 
     /**
      * Returns true if list contains all numbers in the collection
      */
     override fun containsAll(elements: Collection<Int>): Boolean {
-        TODO("Not yet implemented")
+        var result: Boolean = true
+        for( i in elements ) {
+            if(!this.contains(i)) {
+                result = false
+                break
+            }
+        }
+        return result
     }
 
     override fun toString(): String {
@@ -53,13 +64,31 @@ class NaturalList(n: Int) : List<Int> {
      * Функция должна возвращать true, если сравнивается с другой реализацией списка тех же чисел
      * Например, NaturalList(5) должен быть равен listOf(1,2,3,4,5)
      */
-    override fun equals(other: Any?): Boolean = false
+    override fun equals(other: Any?): Boolean {
+        var result: Boolean = false
+        if ( other != null && other is List<*> && this.size == (other as List<*>).size) {
+            result = true
+            for(i in 0 ..< this.size) {
+                if(this[i] != (other as List<*>)[i]){
+                    result = false
+                    break
+                }
+            }
+        }
+        return result
+    }
 
     /**
      * Функция должна возвращать тот же hash-code, что и список другой реализации тех же чисел
      * Например, NaturalList(5).hashCode() должен быть равен listOf(1,2,3,4,5).hashCode()
      */
-    override fun hashCode(): Int = -1
+    override fun hashCode(): Int {
+        var hashCode = 1
+        for (e in this) {
+            hashCode = 31 * hashCode + (e?.hashCode() ?: 0)
+        }
+        return hashCode
+    }
 }
 
 private class NaturalIterator(private val n: Int) : Iterator<Int> {

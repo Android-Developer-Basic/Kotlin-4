@@ -34,16 +34,17 @@ class NaturalList(n: Int) : List<Int> {
     /**
      * Вернуть под-список этого списка, включая [fromIndex] и НЕ включая [toIndex]
      */
-    override fun subList(fromIndex: Int, toIndex: Int): List<Int> {
-        TODO("Not yet implemented")
-    }
+    override fun subList(fromIndex: Int, toIndex: Int): List<Int> =
+        when {
+            fromIndex < 0 || toIndex > size -> throw IndexOutOfBoundsException()
+            fromIndex > toIndex -> throw IllegalArgumentException()
+            else -> filterIndexed { index, _ -> index in fromIndex until toIndex }
+        }
 
     /**
      * Returns true if list contains all numbers in the collection
      */
-    override fun containsAll(elements: Collection<Int>): Boolean {
-        TODO("Not yet implemented")
-    }
+    override fun containsAll(elements: Collection<Int>): Boolean = elements.all { contains(it) }
 
     override fun toString(): String {
         return "NaturalList(1..$size)"
@@ -53,13 +54,19 @@ class NaturalList(n: Int) : List<Int> {
      * Функция должна возвращать true, если сравнивается с другой реализацией списка тех же чисел
      * Например, NaturalList(5) должен быть равен listOf(1,2,3,4,5)
      */
-    override fun equals(other: Any?): Boolean = false
+    override fun equals(other: Any?): Boolean {
+        if (other === this) return true
+        if (other !is List<*>) return false
+        if (other.size != size) return false
+        other.forEachIndexed { index, value -> if (value != get(index)) return false }
+        return true
+    }
 
     /**
      * Функция должна возвращать тот же hash-code, что и список другой реализации тех же чисел
      * Например, NaturalList(5).hashCode() должен быть равен listOf(1,2,3,4,5).hashCode()
      */
-    override fun hashCode(): Int = -1
+    override fun hashCode(): Int = fold(1) { product, value -> product * 31 + value }
 }
 
 private class NaturalIterator(private val n: Int) : Iterator<Int> {

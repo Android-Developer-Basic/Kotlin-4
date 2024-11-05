@@ -35,14 +35,19 @@ class NaturalList(n: Int) : List<Int> {
      * Вернуть под-список этого списка, включая [fromIndex] и НЕ включая [toIndex]
      */
     override fun subList(fromIndex: Int, toIndex: Int): List<Int> {
-        TODO("Not yet implemented")
+        val tempList:MutableList<Int> = mutableListOf()
+        for (i in fromIndex..<toIndex){
+            tempList.add(this[i])
+        }
+        return tempList.toList()
     }
 
     /**
      * Returns true if list contains all numbers in the collection
      */
-    override fun containsAll(elements: Collection<Int>): Boolean {
-        TODO("Not yet implemented")
+    override fun containsAll(elements: Collection<Int>): Boolean{
+        elements.forEach{ if (!this.contains(it)) return false }
+        return true
     }
 
     override fun toString(): String {

@@ -42,7 +42,12 @@ class NaturalList(n: Int) : List<Int> {
      * Returns true if list contains all numbers in the collection
      */
     override fun containsAll(elements: Collection<Int>): Boolean {
-        return elements.all {it in NaturalList(size)  }
+        for (i: Int in elements.indices) {
+            if (!this.contains(elements.elementAt(i)) ){
+                return false
+            }
+        }
+        return true
     }
 
     override fun toString(): String {

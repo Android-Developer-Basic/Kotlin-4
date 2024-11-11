@@ -77,7 +77,14 @@ class NaturalList(n: Int) : List<Int> {
      * Функция должна возвращать тот же hash-code, что и список другой реализации тех же чисел
      * Например, NaturalList(5).hashCode() должен быть равен listOf(1,2,3,4,5).hashCode()
      */
-    override fun hashCode(): Int = this.toList().hashCode()
+    override fun hashCode(): Int {
+        var multiplyResult = 1
+        this.forEach {
+            multiplyResult = 31 * multiplyResult + it
+        }
+        return multiplyResult
+    }
+
 
 }
 

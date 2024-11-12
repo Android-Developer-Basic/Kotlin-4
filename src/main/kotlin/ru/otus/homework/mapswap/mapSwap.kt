@@ -1,6 +1,11 @@
 package ru.otus.homework.mapswap
 
-/**
- * Меняет местами ключи и значения
- */
-fun <K, V> Map<K, V>.swap(): Map<V, K> = TODO("Доделать swap")
+fun <K, V> Map<K, V>.swap(): Map<V, K> {
+
+    val result = HashMap<V, K>()
+    for (key in this.keys) {
+        val target = this[key] ?: continue
+        result[target] = key
+    }
+    return result
+}

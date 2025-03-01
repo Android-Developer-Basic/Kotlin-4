@@ -1,8 +1,5 @@
 package ru.otus.homework
 
-import jdk.internal.org.jline.utils.Colors.s
-
-
 /**
  * Список натуральных чисел от 1 до n
  * @param n Последнее натуральное число в списке
@@ -49,7 +46,7 @@ class NaturalList(n: Int) : List<Int> {
     }
 
     override fun toString(): String {
-        return naturalList().joinToString(prefix = "[", postfix = "]", separator = ", ")
+        return joinToString(prefix = "[", postfix = "]", separator = ", ")
     }
 
     /**

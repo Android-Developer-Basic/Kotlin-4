@@ -46,6 +46,7 @@ class NaturalList(n: Int) : List<Int> {
      * Returns true if list contains all numbers in the collection
      */
     override fun containsAll(elements: Collection<Int>): Boolean {
+        /** return elements.all { it in this } или */
         elements.forEach {
             if (!this.contains(it)) return false
         }
@@ -60,13 +61,39 @@ class NaturalList(n: Int) : List<Int> {
      * Функция должна возвращать true, если сравнивается с другой реализацией списка тех же чисел
      * Например, NaturalList(5) должен быть равен listOf(1,2,3,4,5)
      */
-    override fun equals(other: Any?): Boolean = subList(0, size) == other
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (other !is List<*>) return false
+        return this.size == other.size
+    }
+
 
     /**
      * Функция должна возвращать тот же hash-code, что и список другой реализации тех же чисел
      * Например, NaturalList(5).hashCode() должен быть равен listOf(1,2,3,4,5).hashCode()
      */
-    override fun hashCode(): Int = subList(0, size).hashCode()
+    override fun hashCode(): Int {
+        /**
+         * Hashcode is calculated using below formula
+         *
+         * s[0]*31^(n-1) + s[1]*31^(n-2) + ... + s[0]
+         *
+         * where:
+         *
+         * s is ith character in the string
+         * n is length of the string
+         *
+         */
+        /**
+         *  Нашел описание для строки, оставлю на всякий. Не нашел для целочисленного списка,
+         *  подсмотрел у соседей
+         */
+        var hash = 1
+        for (i in this) {
+            hash = 31 * hash + i.hashCode()
+        }
+        return hash
+    }
 }
 
 private class NaturalIterator(private val n: Int) : Iterator<Int> {

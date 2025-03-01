@@ -3,15 +3,7 @@ package ru.otus.homework.mapswap
 /**
  * Меняет местами ключи и значения
  */
-fun <K, V> Map<K, V>.swap(): Map<V, K> {
-    val result = mutableMapOf<V, K>()
-    this.forEach {
-        result[it.value] = it.key
-    }
-    return result
-}
-
-
+fun <K, V> Map<K, V>.swap(): Map<V, K> = entries.associate { (k, v) -> v to k }
 
 
 fun main() {

@@ -129,7 +129,7 @@ import org.junit.jupiter.api.Test
     @Test
     fun returnsValidSublist() {
         val list = NaturalList(5)
-        val subList = list.subList(1, 3)
+        val subList = list.subList(fromIndex = 1, toIndex = 3)
         assertEquals(2, subList.size)
         assertEquals(2, subList[0])
         assertEquals(3, subList[1])

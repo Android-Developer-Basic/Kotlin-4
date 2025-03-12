@@ -57,11 +57,15 @@ class NaturalList(n: Int) : List<Int> {
      * Например, NaturalList(5) должен быть равен listOf(1,2,3,4,5)
      */
     override fun equals(other: Any?): Boolean {
-        val eqList = other as List<*>
-        if (this.toSet() == eqList.toSet()) {
-            return true
-        } else return false
+        if (this === other) return true
+        if (other == null || other as List<*> != this) return false
+        val eq = other as List<*>
+        for(i in 0..this.size){
+            if ( eq[i] == this[i] && other.size == this.size) return containsAll(eq)
+        }
+        return false
     }
+
 
     /**
      * Функция должна возвращать тот же hash-code, что и список другой реализации тех же чисел

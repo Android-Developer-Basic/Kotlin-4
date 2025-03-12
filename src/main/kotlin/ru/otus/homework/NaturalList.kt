@@ -58,12 +58,12 @@ class NaturalList(n: Int) : List<Int> {
      */
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
-        if (other == null || other as List<*> != this) return false
+        if (other == null ) return false
         val eq = other as List<*>
-        for(i in 0..this.size){
-            if ( eq[i] == this[i] && other.size == this.size) return containsAll(eq)
+        for (i in 0 until this.size) {
+            if (this[i] != other[i]) return false
         }
-        return false
+        return true
     }
 
 

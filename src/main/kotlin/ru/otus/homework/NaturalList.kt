@@ -58,7 +58,7 @@ class NaturalList(n: Int) : List<Int> {
      */
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
-        if (other == null ) return false
+        if (other == null || other != this ) return false
         val eq = other as List<*>
         for (i in 0 until this.size) {
             if (this[i] != other[i]) return false

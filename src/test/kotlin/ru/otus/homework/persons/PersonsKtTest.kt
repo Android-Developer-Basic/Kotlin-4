@@ -14,11 +14,26 @@ class PersonsKtTest {
 
     private val persons = listOf(P1, P2, P3, P4, P5).shuffled()
 
+
+    /**
+     * Проверяет сортировку по возрасту методом [sortByAge], предварительно перемешав список.
+     * */
     @Test
     fun sortsByAge() {
         assertEquals(
             listOf(P5, P4, P3, P2, P1),
             persons.sortByAge()
+        )
+    }
+
+    /**
+     * Проверяет сортировку по возрасту методом [sortByAgeWithComparator], предварительно перемешав список.
+     * */
+    @Test
+    fun sortsByAgeWithComparator() {
+        assertEquals(
+            listOf(P5, P4, P3, P2, P1),
+            persons.sortByAgeWithComparator()
         )
     }
 

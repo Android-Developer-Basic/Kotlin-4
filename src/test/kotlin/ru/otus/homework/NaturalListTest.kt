@@ -3,7 +3,7 @@ package ru.otus.homework
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 
-    class NaturalListTest {
+class NaturalListTest {
 
     @Test
     fun returnsRequestedSize() {
@@ -153,6 +153,29 @@ import org.junit.jupiter.api.Test
             listOf(1, 2, 3, 4, 5),
             NaturalList(5)
         )
+    }
+
+    /**
+     * Для проверки на debugger, равенство по ссылке
+     * */
+    @Test
+    fun equalsByObjectLink() {
+        val expectedAndActual = NaturalList(5)
+        fun someFun(list: NaturalList): NaturalList {
+            println(list.toString())
+            return list
+        }
+        assertEquals(expectedAndActual, someFun(expectedAndActual))
+    }
+
+    /**
+     * Сравнение пустых коллекций
+     * Два варианта assertEquals, чтобы показать, что библиотечные реализации работают аналогично
+     * */
+    @Test
+    fun equalsToOtherEmptyLists() {
+        assertEquals(NaturalList(0), emptyList<String>())
+        assertEquals(emptyList<Int>(), emptyList<String>())
     }
 
     @Test

@@ -35,14 +35,29 @@ class NaturalList(n: Int) : List<Int> {
      * Вернуть под-список этого списка, включая [fromIndex] и НЕ включая [toIndex]
      */
     override fun subList(fromIndex: Int, toIndex: Int): List<Int> {
-        TODO("Not yet implemented")
+
+        if (fromIndex < 0) throw IllegalArgumentException("'fromIndex' is less than 0")
+        if (fromIndex > size) throw IllegalArgumentException("'fromIndex' is greater than size")
+        if (fromIndex > toIndex) throw IllegalArgumentException("'fromIndex' is greater than 'toIndex'")
+        if (toIndex > size) throw IllegalArgumentException("'toIndex' is greater than size")
+
+        return MutableList<Int>(toIndex - fromIndex) { it + 1 + fromIndex }.optimizeReadOnlyList()
+    }
+
+    /**
+     * Copypaste from [kotlin.collections.optimizeReadOnlyList]
+     * */
+    private fun <T> List<T>.optimizeReadOnlyList() = when (size) {
+        0 -> emptyList()
+        1 -> listOf(this[0])
+        else -> this
     }
 
     /**
      * Returns true if list contains all numbers in the collection
      */
     override fun containsAll(elements: Collection<Int>): Boolean {
-        TODO("Not yet implemented")
+        return elements.all { contains(it) }
     }
 
     override fun toString(): String {
@@ -73,7 +88,7 @@ private class NaturalIterator(private val n: Int) : Iterator<Int> {
 }
 
 private class NaturalListIterator(private val n: Int, index: Int = 0) : ListIterator<Int> {
-    private var index:Int = index.coerceIn(0, n - 1)
+    private var index: Int = index.coerceIn(0, n - 1)
     override fun hasNext(): Boolean = index < n
     override fun hasPrevious(): Boolean = index > 0
     override fun next(): Int = if (hasNext()) {
@@ -81,11 +96,13 @@ private class NaturalListIterator(private val n: Int, index: Int = 0) : ListIter
     } else {
         throw NoSuchElementException()
     }
+
     override fun nextIndex(): Int = index
     override fun previous(): Int = if (hasPrevious()) {
         index--
     } else {
         throw NoSuchElementException()
     }
+
     override fun previousIndex(): Int = index
 }

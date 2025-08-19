@@ -16,4 +16,4 @@ fun List<Person>.sortByAgeWithComparator(): List<Person> = sortedWith { it1, it2
  * - Фамилии сортируются по алфавиту в порядке возрастания
  * - Если фамилии совпадают, персоны сортируются по имени в порядке возрастания
  */
-fun List<Person>.sortByName(): List<Person> = TODO("Доделать sortBySurname")
+fun List<Person>.sortByName(): List<Person> =  sortedBy { it.surname + it.name }

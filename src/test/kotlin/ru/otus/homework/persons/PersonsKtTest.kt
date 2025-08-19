@@ -37,6 +37,9 @@ class PersonsKtTest {
         )
     }
 
+    /**
+     * Проверяет сортировку по имени методом [sortsByNames], предварительно перемешав список.
+     * */
     @Test
     fun sortsByNames() {
         assertEquals(

@@ -34,15 +34,15 @@ class NaturalList(n: Int) : List<Int> {
     /**
      * Вернуть под-список этого списка, включая [fromIndex] и НЕ включая [toIndex]
      */
-    override fun subList(fromIndex: Int, toIndex: Int): List<Int> {
-        TODO("Not yet implemented")
-    }
+    override fun subList(fromIndex: Int, toIndex: Int): List<Int> =
+        this.filterIndexed { index, i -> index >= fromIndex && index < toIndex }
 
     /**
      * Returns true if list contains all numbers in the collection
      */
     override fun containsAll(elements: Collection<Int>): Boolean {
-        TODO("Not yet implemented")
+        if (this.size != elements.size) return false
+        return elements.containsAll(this)
     }
 
     override fun toString(): String {
@@ -53,13 +53,18 @@ class NaturalList(n: Int) : List<Int> {
      * Функция должна возвращать true, если сравнивается с другой реализацией списка тех же чисел
      * Например, NaturalList(5) должен быть равен listOf(1,2,3,4,5)
      */
-    override fun equals(other: Any?): Boolean = false
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        return if (other is List<*> && other.size == this.size && this.isNotEmpty() && other[0] is Int) {
+            this.containsAll(other) && other.containsAll(this)
+        } else false
+    }
 
     /**
      * Функция должна возвращать тот же hash-code, что и список другой реализации тех же чисел
      * Например, NaturalList(5).hashCode() должен быть равен listOf(1,2,3,4,5).hashCode()
      */
-    override fun hashCode(): Int = -1
+    override fun hashCode(): Int = this.toList().hashCode()
 }
 
 private class NaturalIterator(private val n: Int) : Iterator<Int> {
@@ -73,7 +78,7 @@ private class NaturalIterator(private val n: Int) : Iterator<Int> {
 }
 
 private class NaturalListIterator(private val n: Int, index: Int = 0) : ListIterator<Int> {
-    private var index:Int = index.coerceIn(0, n - 1)
+    private var index: Int = index.coerceIn(0, n - 1)
     override fun hasNext(): Boolean = index < n
     override fun hasPrevious(): Boolean = index > 0
     override fun next(): Int = if (hasNext()) {

@@ -66,13 +66,32 @@ class NaturalList(n: Int) : List<Int> {
      * Функция должна возвращать true, если сравнивается с другой реализацией списка тех же чисел
      * Например, NaturalList(5) должен быть равен listOf(1,2,3,4,5)
      */
-    override fun equals(other: Any?): Boolean = false
+    override fun equals(other: Any?): Boolean {
+        val listOther : List<Int> = (other as List<Int>)
+        val listThis :  MutableList<Int> = mutableListOf()
+        for (i in 1..size) {
+            listThis.add(i)
+        }
+
+        if(listThis.containsAll(listOther) && listOther.containsAll(listThis)) {
+            return true
+        }
+
+        return false
+    }
 
     /**
      * Функция должна возвращать тот же hash-code, что и список другой реализации тех же чисел
      * Например, NaturalList(5).hashCode() должен быть равен listOf(1,2,3,4,5).hashCode()
      */
-    override fun hashCode(): Int = -1
+    override fun hashCode(): Int {
+        var res : Int = 1
+
+        for (i in 1..size) {
+            res = 31 * res + i
+        }
+        return res
+    }
 }
 
 private class NaturalIterator(private val n: Int) : Iterator<Int> {

@@ -10,4 +10,4 @@ fun List<Person>.sortByAge(): List<Person> = sortedByDescending { it.age }
  * - Фамилии сортируются по алфавиту в порядке возрастания
  * - Если фамилии совпадают, персоны сортируются по имени в порядке возрастания
  */
-fun List<Person>.sortByName(): List<Person> = TODO("Доделать sortBySurname")
+fun List<Person>.sortByName(): List<Person> = sortedBy{ it.name }.sortedBy{ it.surname }

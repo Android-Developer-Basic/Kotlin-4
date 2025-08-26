@@ -67,17 +67,16 @@ class NaturalList(n: Int) : List<Int> {
      * Например, NaturalList(5) должен быть равен listOf(1,2,3,4,5)
      */
     override fun equals(other: Any?): Boolean {
-        val listOther : List<Int> = (other as List<Int>)
-        val listThis :  MutableList<Int> = mutableListOf()
+        val listOther = (other as? List<*>) ?: return false
+        if (size != listOther.size)
+            return false
+
         for (i in 1..size) {
-            listThis.add(i)
+            if (i != listOther[i-1])
+                return false
         }
 
-        if(listThis.containsAll(listOther) && listOther.containsAll(listThis)) {
-            return true
-        }
-
-        return false
+        return true
     }
 
     /**

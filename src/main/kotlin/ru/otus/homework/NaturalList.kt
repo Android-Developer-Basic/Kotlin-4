@@ -36,8 +36,8 @@ class NaturalList(n: Int) : List<Int> {
      */
     override fun subList(fromIndex: Int, toIndex: Int): List<Int> {
         val newList = mutableListOf<Int>()
-        this.forEachIndexed { index, item ->
-            if (index >= fromIndex && index < toIndex) newList.add(item)
+        for (index in fromIndex until toIndex) {
+            newList.add(this[index])
         }
         return newList
     }
@@ -46,9 +46,10 @@ class NaturalList(n: Int) : List<Int> {
      * Returns true if list contains all numbers in the collection
      */
     override fun containsAll(elements: Collection<Int>): Boolean {
-        var count = 0
-        elements.forEach { element -> if (this.contains(element)) count += 1 }
-        return count == elements.size
+        elements.forEach{ element ->
+            if (!this.contains(element)) return false
+        }
+        return true
     }
 
     override fun toString(): String {
@@ -60,16 +61,15 @@ class NaturalList(n: Int) : List<Int> {
      * Например, NaturalList(5) должен быть равен listOf(1,2,3,4,5)
      */
     override fun equals(other: Any?): Boolean {
-        var count = 0
         val listToCompare = other as? List<*> ?: emptyList<Int>()
 
         if (this.size == listToCompare.size) {
             this.forEachIndexed { index, item ->
-                if (listToCompare[index] == item) count += 1
+                if (listToCompare[index] != item) return false
             }
-        }
+        } else return false
 
-        return count == this.size
+        return true
     }
 
     /**

@@ -18,4 +18,9 @@ fun main(){
     val vk = kv.swap()
     println(vk.toString())
 
+
+    val myList = NaturalList(6)
+    val subList = myList.subList(2, 4)
+    println(subList.toString())
+
 }

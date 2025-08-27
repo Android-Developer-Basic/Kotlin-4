@@ -1,5 +1,7 @@
 package ru.otus.homework
 
+import java.lang.IllegalArgumentException
+
 /**
  * Список натуральных чисел от 1 до n
  * @param n Последнее натуральное число в списке
@@ -35,14 +37,30 @@ class NaturalList(n: Int) : List<Int> {
      * Вернуть под-список этого списка, включая [fromIndex] и НЕ включая [toIndex]
      */
     override fun subList(fromIndex: Int, toIndex: Int): List<Int> {
-        TODO("Not yet implemented")
+        if(fromIndex > size || toIndex >= size){
+            throw NoSuchElementException()
+        } else if(fromIndex > toIndex){
+            throw IllegalArgumentException("Начальный индекс больше конечного")
+        }
+        val _size = toIndex - fromIndex
+        val array = IntArray(_size)
+        var i = 0
+        for(indx in fromIndex until toIndex)
+            array[i++] = this[indx]
+
+        return array.toList()
     }
 
     /**
      * Returns true if list contains all numbers in the collection
      */
     override fun containsAll(elements: Collection<Int>): Boolean {
-        TODO("Not yet implemented")
+        for(i in 1 .. elements.size){
+            if(!this.contains(i)){
+                return false
+            }
+        }
+        return true
     }
 
     override fun toString(): String {

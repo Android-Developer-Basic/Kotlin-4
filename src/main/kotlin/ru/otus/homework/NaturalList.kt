@@ -1,6 +1,7 @@
 package ru.otus.homework
 
 import java.lang.IllegalArgumentException
+import java.util.Objects
 
 /**
  * Список натуральных чисел от 1 до n
@@ -42,6 +43,9 @@ class NaturalList(n: Int) : List<Int> {
         } else if(fromIndex > toIndex){
             throw IllegalArgumentException("Начальный индекс больше конечного")
         }
+
+        if (fromIndex == 0 && toIndex == 0) return this
+
         val _size = toIndex - fromIndex
         val array = IntArray(_size)
         var i = 0
@@ -55,7 +59,7 @@ class NaturalList(n: Int) : List<Int> {
      * Returns true if list contains all numbers in the collection
      */
     override fun containsAll(elements: Collection<Int>): Boolean {
-        for(i in 1 .. elements.size){
+        for(i in elements){
             if(!this.contains(i)){
                 return false
             }
@@ -71,13 +75,38 @@ class NaturalList(n: Int) : List<Int> {
      * Функция должна возвращать true, если сравнивается с другой реализацией списка тех же чисел
      * Например, NaturalList(5) должен быть равен listOf(1,2,3,4,5)
      */
-    override fun equals(other: Any?): Boolean = false
+    override fun equals(other: Any?): Boolean {
+        if(this === other){
+            return true
+        } else if(other !is List<*>) {
+            return false
+        }
+        val otherList = other as List<*>
+        if(otherList.size != this.size)
+            return false
+
+        try {
+            var j = 0
+            for (i in 1..size) {
+                if (i != otherList.get(j++)){
+                    return false
+                }
+            }
+        }catch (ex: IndexOutOfBoundsException){
+            return false
+        }
+
+        return true
+    }
 
     /**
      * Функция должна возвращать тот же hash-code, что и список другой реализации тех же чисел
      * Например, NaturalList(5).hashCode() должен быть равен listOf(1,2,3,4,5).hashCode()
      */
-    override fun hashCode(): Int = -1
+    override fun hashCode(): Int {
+        val array = Array(size) { i -> i + 1}
+        return Objects.hash(array)
+    }
 }
 
 private class NaturalIterator(private val n: Int) : Iterator<Int> {

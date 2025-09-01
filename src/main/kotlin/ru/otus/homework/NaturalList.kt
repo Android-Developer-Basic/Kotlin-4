@@ -35,14 +35,26 @@ class NaturalList(n: Int) : List<Int> {
      * Вернуть под-список этого списка, включая [fromIndex] и НЕ включая [toIndex]
      */
     override fun subList(fromIndex: Int, toIndex: Int): List<Int> {
-        TODO("Not yet implemented")
+        var pos = fromIndex
+        val sList = List(toIndex - fromIndex) { this.get(pos++) }
+        return sList
     }
 
     /**
      * Returns true if list contains all numbers in the collection
      */
     override fun containsAll(elements: Collection<Int>): Boolean {
-        TODO("Not yet implemented")
+        var checkFlag: Boolean = false
+        for (i in 0 until elements.size) {
+            checkFlag = false
+            for (j in 0 until this.size) {
+                if (this.elementAt(j) == elements.elementAt(i)) {
+                    checkFlag = true; break
+                }
+            }
+            if (!checkFlag) break
+        }
+        return checkFlag
     }
 
     override fun toString(): String {
@@ -53,13 +65,29 @@ class NaturalList(n: Int) : List<Int> {
      * Функция должна возвращать true, если сравнивается с другой реализацией списка тех же чисел
      * Например, NaturalList(5) должен быть равен listOf(1,2,3,4,5)
      */
-    override fun equals(other: Any?): Boolean = false
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        val iter = this.listIterator()
+        val otherList = other as List<Int>
+        val otherIter = otherList.listIterator()
+        while (iter.hasNext() && otherIter.hasNext()) {
+            if (iter.next() != otherIter.next()) return false
+        }
+
+        return !(iter.hasNext() || otherIter.hasNext())
+    }
 
     /**
      * Функция должна возвращать тот же hash-code, что и список другой реализации тех же чисел
      * Например, NaturalList(5).hashCode() должен быть равен listOf(1,2,3,4,5).hashCode()
      */
-    override fun hashCode(): Int = -1
+    override fun hashCode(): Int {
+        var hashCode = 1
+        for (e in this) {
+            hashCode = 31 * hashCode + (if (e == null) 0 else e.hashCode())
+        }
+        return hashCode
+    }
 }
 
 private class NaturalIterator(private val n: Int) : Iterator<Int> {
